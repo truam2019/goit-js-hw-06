@@ -1,22 +1,26 @@
-function handleSubmit(event) {
+const form = document.querySelector('form.login-form');
+
+form.addEventListener('submit', onFormSubmit);
+
+
+function onFormSubmit(event) {
     event.preventDefault();
 
-    const form = event.target;
-    const email = form.elements.email.value.trim();
-    const password = form.elements.password.value.trim();
+    const formElements = event.currentTarget.elements; 
+    const email = formElements.email.value;
+    const password = formElements.password.value;
 
-    if (!email || !password) {
-      alert('Por favor, rellena todos los campos.');
-      return;
+    if (email == '' || password == '') {
+        alert("Enter both input parameters!");
+        form.reset();
+        return false;
     }
 
-    const userData = {
-      email: email,
-      password: password,
-    };
+    const formData = {
+        email,
+        password,
+    }
+    console.log(formData);
 
-    console.log(userData);
-
-    // Reiniciar los valores del formulario
     form.reset();
-  }
+}
